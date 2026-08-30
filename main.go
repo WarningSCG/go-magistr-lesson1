@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"io"
-	"math"
 	"net/http"
 	"strconv"
 	"strings"
@@ -118,7 +117,7 @@ func fetchStats() (serverStats, error) {
 }
 
 func checkStats(stats serverStats) {
-	if stats.loadAverage > 30 {
+	if stats.loadAverage >= 30 {
 		fmt.Printf(
 			"Load Average is too high: %s\n",
 			stats.loadAverageRaw,
@@ -132,7 +131,7 @@ func checkStats(stats serverStats) {
 	if memoryUsage > 80 {
 		fmt.Printf(
 			"Memory usage too high: %d%%\n",
-			int(math.Round(memoryUsage)),
+			int(memoryUsage),
 		)
 	}
 
